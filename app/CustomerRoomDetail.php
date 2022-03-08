@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerRoomDetail extends Model
 {
     public $timestamps = false;
+    protected $guarded = [];
+
     public function customer()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -19,6 +21,6 @@ class CustomerRoomDetail extends Model
 
     public function bookinghistories()
     {
-        return $this->hasMany(BookingHistory::class);
+        return $this->hasOne(BookingHistory::class);
     }
 }

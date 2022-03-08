@@ -19,7 +19,7 @@ class CreateBookingHistoriesTable extends Migration
             $table->foreign('customer_room_detail_id')->references('id')->on('customer_room_details');
             $table->boolean('has_cancelled')->default(0);
             $table->dateTime('booking_datetime');
-            $table->dateTime('booking_cancellation_datetime')->nulable();
+            $table->dateTime('booking_cancellation_datetime')->nullable();
         });
     }
 

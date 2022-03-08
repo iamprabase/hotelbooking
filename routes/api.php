@@ -31,9 +31,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update-profile-picture', [AuthenticationController::class, 'updateProfilePicture']);
     Route::get('/get-hotel-listing', [BookingController::class, 'getHotelListing']);
     Route::get('/get-single-hotel-detail', [BookingController::class, 'getSingleHotelById']);
-    Route::get('/book-hotel', [BookingController::class, 'bookHotel']);
-    Route::get('/cancel-booking', [BookingController::class, 'cancelBooking']);
-    Route::get('/update-booking', [BookingController::class, 'updateBooking']);
+    Route::post('/book-hotel', [BookingController::class, 'bookHotel']);
+    Route::post('/cancel-booking', [BookingController::class, 'cancelBooking']);
+    Route::post('/update-booking', [BookingController::class, 'updateBooking']);
     Route::get('/get-booking-detail', [BookingController::class, 'getBookingInfo']);
 });
 
