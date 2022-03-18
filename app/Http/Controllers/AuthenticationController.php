@@ -159,7 +159,7 @@ class AuthenticationController extends Controller
             ]);
         } catch(\Exception $e) {
             return response()->json([
-                "message" => "Some Error Occured.",
+                "message" => $e->getMessage(),
             ], 400);
         }
     }

@@ -27,8 +27,8 @@ trait FileManageTrait
             $hotel_room_id = $id;
         }
 
-        if($file_manage->id) {
-            $file_manage->update([
+        if(isset($file_manage->id)) {
+            $file = $file_manage->update([
                 'file_name' => $filename, 
                 'file_path' => $path . $name . '.' . $extension,
                 'file_ext' => $extension,
@@ -38,7 +38,7 @@ trait FileManageTrait
             $file = FileManage::create([
                 'user_id' => $user_id,
                 'hotel_id' => $hotel_id,
-                'hotel_room_id' => $hotel_room_id, 
+                'hotel_room_detail_id' => $hotel_room_id, 
                 'file_name' => $filename, 
                 'file_path' => $path . $name . '.' . $extension,
                 'file_ext' => $extension,
@@ -47,7 +47,7 @@ trait FileManageTrait
         }
 
 
-        return $file;
+        return $path . $name . '.' . $extension;
     }
 
     public function createPath($path)
