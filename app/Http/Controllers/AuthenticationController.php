@@ -80,7 +80,8 @@ class AuthenticationController extends Controller
                 $email = $user->email;
             }
         }
-        $attemptLogin = Auth::attempt(['email' => $email, 'password' => $request->password]);
+        $is_admin = isset($request->is_admin) ? $request->is_admin : 0;
+        $attemptLogin = Auth::attempt(['email' => $email, 'password' => $request->password, 'is_admin' => $is_admin]);
 
         if ($attemptLogin) {
             $token = Auth::user()->createToken('visible')->plainTextToken;
@@ -115,8 +116,8 @@ class AuthenticationController extends Controller
             'first_name' => 'required|max:50',
             'middle_name' => 'nullable|max:50',
             'last_name' => 'required|max:50',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'phone_number' => 'nullable|unique:users,phone_number,'.$user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id.',id,is_admin,0',
+            'phone_number' => 'nullable|unique:users,phone_number,'.$user->id.',id,is_admin,0',
         ]);
         if ($validate->fails()) {
             return response([
