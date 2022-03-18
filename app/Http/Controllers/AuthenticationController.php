@@ -112,12 +112,13 @@ class AuthenticationController extends Controller
     public function updateProfile(Request $request)
     {
         $user = Auth::user();
+        $is_admin = isset($request->is_admin) ? $request->is_admin : 0;
         $validate = Validator::make($request->all(), [
             'first_name' => 'required|max:50',
             'middle_name' => 'nullable|max:50',
             'last_name' => 'required|max:50',
-            'email' => 'required|email|unique:users,email,'.$user->id.',id,is_admin,0',
-            'phone_number' => 'nullable|unique:users,phone_number,'.$user->id.',id,is_admin,0',
+            'email' => 'required|email|unique:users,email,'.$user->id.',id,is_admin,'.$is_admin,
+            'phone_number' => 'nullable|unique:users,phone_number,'.$user->id.',id,is_admin,'.$is_admin,
         ]);
         if ($validate->fails()) {
             return response([
